@@ -1,6 +1,6 @@
 #include "../include/array_list.h"
 
-ArrayList* initialize_custom_arraylist(size_t capacity) {
+ArrayList* initialize_custom_al(size_t capacity) {
     
     ArrayList* arr;
 
@@ -23,11 +23,11 @@ ArrayList* initialize_custom_arraylist(size_t capacity) {
     return arr;
 }
 
-ArrayList* initialize_default_arraylist() {
+ArrayList* initialize_default_al() {
     return initialize_custom_arraylist(INITIAL_CAPACITY);
 }
 
-int teardown_arraylist(ArrayList* arr) {
+int teardown_al(ArrayList* arr) {
 
     if (arr == NULL) {
         return FAILURE;
@@ -41,7 +41,7 @@ int teardown_arraylist(ArrayList* arr) {
     return SUCCESS;
 }
 
-ArrayList* merge_arraylists(ArrayList* arr1, ArrayList* arr2) {
+ArrayList* merge_als(ArrayList* arr1, ArrayList* arr2) {
 
     if(arr1 == NULL || arr2 == NULL) {
         return FAILURE;
@@ -68,7 +68,7 @@ ArrayList* merge_arraylists(ArrayList* arr1, ArrayList* arr2) {
     return arr3;
 }
 
-int add(ArrayList* arr, Data* data) {
+int add_al(ArrayList* arr, Data* data) {
 
     if (arr == NULL || data == NULL) return FAILURE;
 
@@ -82,7 +82,7 @@ int add(ArrayList* arr, Data* data) {
     return SUCCESS;
 }
 
-int insert(ArrayList* arr, Data* data, int index) {
+int insert_al(ArrayList* arr, Data* data, int index) {
 
     if (arr == NULL || data == NULL || index < 0 || index > arr->size) {
         return FAILURE;
@@ -102,15 +102,15 @@ int insert(ArrayList* arr, Data* data, int index) {
     return SUCCESS;
 }
 
-int insert_to_front(ArrayList* arr, Data* data) {
+int insert_to_front_al(ArrayList* arr, Data* data) {
     return insert(arr, data, 0);
 }
 
-int insert_to_back(ArrayList* arr, Data* data) {
+int insert_to_back_al(ArrayList* arr, Data* data) {
     return insert(arr, data, arr->size);
 }
 
-Data* remove(ArrayList* arr, int index) {
+Data* remove_al(ArrayList* arr, int index) {
 
     if (arr == NULL || arr->size == 0) {
         return NULL;
@@ -131,15 +131,15 @@ Data* remove(ArrayList* arr, int index) {
     return removed;
 }
 
-Data* remove_from_front(ArrayList* arr) {
+Data* remove_from_front_al(ArrayList* arr) {
     return remove(arr, 0);
 }
 
-Data* remove_from_back(ArrayList* arr) {
+Data* remove_from_back_al(ArrayList* arr) {
     return remove(arr, arr->size - 1);
 }
 
-Data* get(ArrayList* arr, int index) {
+Data* get_al(ArrayList* arr, int index) {
 
     if (arr == NULL || index < 0 || index >= arr->size) {
         return NULL;
@@ -148,7 +148,7 @@ Data* get(ArrayList* arr, int index) {
     return &arr->array[index];
 }
 
-int increase_size(ArrayList* arr) {
+int increase_size_al(ArrayList* arr) {
 
     if (arr == NULL) return FAILURE;
 
@@ -166,7 +166,7 @@ int increase_size(ArrayList* arr) {
     return SUCCESS;
 }
 
-int decrease_size(ArrayList* arr) {
+int decrease_size_al(ArrayList* arr) {
 
     if (arr == NULL) return FAILURE;
 

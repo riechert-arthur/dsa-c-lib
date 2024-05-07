@@ -1,6 +1,6 @@
 #include "../include/linked_list.h"
 
-LinkedList* initialize_linkedlist() {
+LinkedList* initialize_ll() {
 
     LinkedList* list;
 
@@ -21,7 +21,7 @@ LinkedList* initialize_linkedlist() {
     return list;
 }
 
-int insert(LinkedList* list, void* data, int index) {
+int insert_ll(LinkedList* list, void* data, int index) {
 
     if (list == NULL || data == NULL || index < 0 || index > list->size) {
         return FAILURE;
@@ -29,7 +29,7 @@ int insert(LinkedList* list, void* data, int index) {
 
     Node* curr = list->head;
 
-    Node* new = alloc_node(data);
+    Node* new = alloc_node_ll(data);
     new->size = sizeof(*data);
 
     if (index == 0) {
@@ -50,22 +50,22 @@ int insert(LinkedList* list, void* data, int index) {
     return SUCCESS;
 }
 
-int insert_to_front(LinkedList* list, void* data) {
-    return insert(list, data, 0);
+int insert_to_front_ll(LinkedList* list, void* data) {
+    return insert_ll(list, data, 0);
 }
 
-int insert_to_back(LinkedList* list, void* data) {
-    return insert(list, data, list->size);
+int insert_to_back_ll(LinkedList* list, void* data) {
+    return insert_ll(list, data, list->size);
 }
 
-Node* remove(LinkedList* list, Node* node, int (*equals)(void*, void*)) {
+Node* remove_ll(LinkedList* list, Node* node, int (*equals)(void*, void*)) {
 
     if (list == NULL || node == NULL) {
         return NULL;
     }
 
     if (equals == NULL) {
-        equals = &default_equals;
+        equals = &default_equals_ll;
     }
 
     Node* curr = list->head;
@@ -83,7 +83,7 @@ Node* remove(LinkedList* list, Node* node, int (*equals)(void*, void*)) {
     return NULL;
 }
 
-Node* remove_at_index(LinkedList* list, int index) {
+Node* remove_at_index_ll(LinkedList* list, int index) {
 
     if (list == NULL || index < 0 || index >= list->size) {
         return NULL;
@@ -94,7 +94,7 @@ Node* remove_at_index(LinkedList* list, int index) {
     if (index == 0) {
         Node* removed = curr;
         list->head = curr->next;
-        dealloc_node(curr);
+        dealloc_node_ll(curr);
         return curr;
     }
 
@@ -104,28 +104,28 @@ Node* remove_at_index(LinkedList* list, int index) {
 
     Node* removed = curr->next;
     curr->next = curr->next->next;
-    dealloc_node(curr->next);
+    dealloc_node_ll(curr->next);
     --list->size;
 
     return removed;
 }
 
-Node* remove_from_front(LinkedList* list) {
-    return remove_at_index(list, 0);
+Node* remove_from_front_ll(LinkedList* list) {
+    return remove_at_index_ll(list, 0);
 }
 
-Node* remove_from_back(LinkedList* list) {
-    return remove_at_index(list, list->size);
+Node* remove_from_back_ll(LinkedList* list) {
+    return remove_at_index_ll(list, list->size);
 }
 
-Node* get(LinkedList* list, void* data, int (*equals)(void*, void*)) {
+Node* get_ll(LinkedList* list, void* data, int (*equals)(void*, void*)) {
 
     if (list == NULL || data == NULL) {
         return NULL;
     }
 
     if (equals == NULL) {
-        equals = &default_equals;
+        equals = &default_equals_ll;
     }
 
     Node* curr = list->head;
@@ -138,7 +138,7 @@ Node* get(LinkedList* list, void* data, int (*equals)(void*, void*)) {
     return NULL;
 }
 
-Node* get_at_index(LinkedList* list, int index) {
+Node* get_at_index_ll(LinkedList* list, int index) {
 
     if (list == NULL || index < 0 || index >= list->size) {
         return NULL;
@@ -153,7 +153,7 @@ Node* get_at_index(LinkedList* list, int index) {
     return curr;
 }
 
-Node* alloc_node(void* data) {
+Node* alloc_node_ll(void* data) {
     
     if (data == NULL) return NULL;
 
@@ -166,7 +166,7 @@ Node* alloc_node(void* data) {
     return new;
 }
 
-int dealloc_node(Node* node) {
+int dealloc_node_ll(Node* node) {
 
     if (node) {
         if (node->data) free(node->data);
@@ -176,6 +176,6 @@ int dealloc_node(Node* node) {
     return SUCCESS;
 }
 
-int default_equals(void* node1, void* node2) {
+int default_equals_ll(void* node1, void* node2) {
     return node1 == node2;
 }
