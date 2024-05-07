@@ -1,0 +1,1 @@
+#define TERMINATED 0
