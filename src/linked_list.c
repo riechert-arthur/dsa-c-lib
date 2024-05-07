@@ -21,6 +21,43 @@ LinkedList* initialize_ll() {
     return list;
 }
 
+int teardown_ll(LinkedList* list) {
+
+    if (list == NULL) {
+        return FAILURE;
+    }
+
+    Node* curr = list->head;
+
+    while (curr != NULL) {
+        Node* temp = curr;
+        curr = curr->next;
+        if (!dealloc_node_ll(temp)) return FAILURE;
+    }
+
+    list->head = NULL;
+    free(list);
+
+    return SUCCESS;
+}
+
+LinkedList* merge_lls(LinkedList* list1, LinkedList* list2) {
+
+    if (list1 == NULL || list2 == NULL) {
+        return FAILURE;
+    }
+
+    Node* curr = list1->head;
+
+    while (curr->next != NULL) {
+        curr = curr->next;
+    }
+
+    curr->next = list2->head;
+
+    return curr;
+}
+
 int insert_ll(LinkedList* list, void* data, int index) {
 
     if (list == NULL || data == NULL || index < 0 || index > list->size) {
@@ -151,6 +188,27 @@ Node* get_at_index_ll(LinkedList* list, int index) {
     }
 
     return curr;
+}
+
+Node* get_back_ll(LinkedList* list) {
+    return get_at_index_ll(list, list->size);
+}
+
+Node* get_front_ll(LinkedList* list) {
+    return get_at_index_ll(list, 0);
+}
+
+int is_empty_ll(LinkedList* list) {
+
+    if (list == NULL) {
+        return EMPTY;
+    }
+
+    if (list->size == 0) {
+        return EMPTY;
+    } else {
+        return NOT_EMPTY;
+    }
 }
 
 Node* alloc_node_ll(void* data) {

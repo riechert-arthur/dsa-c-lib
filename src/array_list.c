@@ -24,7 +24,7 @@ ArrayList* initialize_custom_al(size_t capacity) {
 }
 
 ArrayList* initialize_default_al() {
-    return initialize_custom_arraylist(INITIAL_CAPACITY);
+    return initialize_custom_al(INITIAL_CAPACITY);
 }
 
 int teardown_al(ArrayList* arr) {
@@ -51,7 +51,7 @@ ArrayList* merge_als(ArrayList* arr1, ArrayList* arr2) {
 
     ArrayList* arr3;
     
-    if (!(arr3 = initialize_custom_arraylist(new_size))) {
+    if (!(arr3 = initialize_custom_al(new_size))) {
         return FAILURE;
     }
 
@@ -73,7 +73,7 @@ int add_al(ArrayList* arr, Data* data) {
     if (arr == NULL || data == NULL) return FAILURE;
 
     if (arr->size >= arr->capacity) {
-        if(!increase_size(arr)) return FAILURE;
+        if(!increase_size_al(arr)) return FAILURE;
     }
 
     arr->array[arr->size] = *data;
@@ -103,11 +103,11 @@ int insert_al(ArrayList* arr, Data* data, int index) {
 }
 
 int insert_to_front_al(ArrayList* arr, Data* data) {
-    return insert(arr, data, 0);
+    return insert_al(arr, data, 0);
 }
 
 int insert_to_back_al(ArrayList* arr, Data* data) {
-    return insert(arr, data, arr->size);
+    return insert_al(arr, data, arr->size);
 }
 
 Data* remove_al(ArrayList* arr, int index) {
@@ -117,7 +117,7 @@ Data* remove_al(ArrayList* arr, int index) {
     }
 
     if (arr->size < arr->capacity / RESIZE_FACTOR - 1) {
-        if(!decrease_size(arr)) return NULL;
+        if(!decrease_size_al(arr)) return NULL;
     }
 
     Data* removed = &arr->array[index];
@@ -132,11 +132,11 @@ Data* remove_al(ArrayList* arr, int index) {
 }
 
 Data* remove_from_front_al(ArrayList* arr) {
-    return remove(arr, 0);
+    return remove_al(arr, 0);
 }
 
 Data* remove_from_back_al(ArrayList* arr) {
-    return remove(arr, arr->size - 1);
+    return remove_al(arr, arr->size - 1);
 }
 
 Data* get_al(ArrayList* arr, int index) {
@@ -146,6 +146,27 @@ Data* get_al(ArrayList* arr, int index) {
     }
 
     return &arr->array[index];
+}
+
+Data* get_back_al(ArrayList* arr) {
+    return get_al(arr, arr->size);
+}
+
+Data* get_front_al(ArrayList* arr) {
+    return get_al(arr, 0);
+}
+
+int is_empty_al(ArrayList* arr) {
+
+    if (arr == NULL) {
+        return EMPTY;
+    }
+
+    if (arr->size == 0) {
+        return EMPTY;
+    } else {
+        return NOT_EMPTY;
+    }
 }
 
 int increase_size_al(ArrayList* arr) {
