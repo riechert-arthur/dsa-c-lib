@@ -18,16 +18,16 @@ typedef struct {
 } ArrayList;
 
 ArrayList* initialize_custom_arraylist(size_t);
-ArrayList* initialize_default_arraylist();
+ArrayList* initialize_default_arraylist(void);
 int teardown_arraylist(ArrayList*);
 ArrayList* merge_arraylists(ArrayList*, ArrayList*);
 int add(ArrayList*, Data*);
 int insert(ArrayList*, Data*, int);
 int insert_to_front(ArrayList*, Data*);
 int insert_to_back(ArrayList*, Data*);
-int remove(ArrayList*, int);
-int remove_from_front(ArrayList*);
-int remove_from_back(ArrayList*);
+Data* remove(ArrayList*, int);
+Data* remove_from_front(ArrayList*);
+Data* remove_from_back(ArrayList*);
 Data* get(ArrayList*, int);
 int increase_size(ArrayList*);
 int decrease_size(ArrayList*);

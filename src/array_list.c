@@ -120,13 +120,15 @@ Data* remove(ArrayList* arr, int index) {
         if(!decrease_size(arr)) return NULL;
     }
 
+    Data* removed = &arr->array[index];
+
     for (int i = index; i < arr->size; ++i) {
         arr->array[i] = arr->array[i + 1];
     }
 
     --arr->size;
 
-    return SUCCESS;
+    return removed;
 }
 
 Data* remove_from_front(ArrayList* arr) {
